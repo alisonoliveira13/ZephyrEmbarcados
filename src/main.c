@@ -142,7 +142,7 @@ void tarefa_soft_realtime(void) {
 static int cmd_sysinfo(const struct shell *sh, size_t argc, char **argv) {
     shell_print(sh, "--- Informacoes do Sistema ---");
     shell_print(sh, "\n--- Tarefas em Execucao ---");
-    thread_analyzer_print(); // Corrigido: adicionar parâmetro CPU
+    thread_analyzer_print(sh); // Corrigido: passar o shell como parâmetro
     return 0;
 }
 

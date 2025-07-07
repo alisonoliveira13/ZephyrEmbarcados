@@ -14,3 +14,12 @@
 &usbotg_fs {
 	status = "okay";
 };
+
+/* Ativa o ADC e o DAC */
+&adc1 {
+	status = "okay";
+};
+
+&dac1 {
+	status = "okay";
+};
