@@ -148,6 +148,10 @@ C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/traci
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/tracing/CMakeFiles/rebuild_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/usb/CMakeFiles/edit_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/usb/CMakeFiles/rebuild_cache.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/usb/device/CMakeFiles/edit_cache.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/usb/device/CMakeFiles/rebuild_cache.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/usb/device/class/CMakeFiles/edit_cache.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/usb/device/class/CMakeFiles/rebuild_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/shell/CMakeFiles/edit_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/shell/CMakeFiles/rebuild_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/shell/modules/CMakeFiles/edit_cache.dir
@@ -177,6 +181,9 @@ C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/pcie
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/pcie/CMakeFiles/rebuild_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/usb/CMakeFiles/edit_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/usb/CMakeFiles/rebuild_cache.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/usb/device/CMakeFiles/drivers__usb__device.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/usb/device/CMakeFiles/edit_cache.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/usb/device/CMakeFiles/rebuild_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/usb/common/CMakeFiles/edit_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/usb/common/CMakeFiles/rebuild_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/usb_c/CMakeFiles/edit_cache.dir
@@ -196,6 +203,9 @@ C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/dac/
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/gpio/CMakeFiles/drivers__gpio.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/gpio/CMakeFiles/edit_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/gpio/CMakeFiles/rebuild_cache.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/hwinfo/CMakeFiles/edit_cache.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/hwinfo/CMakeFiles/rebuild_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/pinctrl/CMakeFiles/drivers__pinctrl.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/pinctrl/CMakeFiles/edit_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/pinctrl/CMakeFiles/rebuild_cache.dir
