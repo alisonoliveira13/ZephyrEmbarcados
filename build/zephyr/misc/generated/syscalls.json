@@ -145,46 +145,6 @@
     ],
     [
         [
-            "int adc_channel_setup",
-            "const struct device *dev,\n\t\t\t\tconst struct adc_channel_cfg *channel_cfg"
-        ],
-        "adc.h",
-        true
-    ],
-    [
-        [
-            "int adc_read",
-            "const struct device *dev,\n\t\t       const struct adc_sequence *sequence"
-        ],
-        "adc.h",
-        true
-    ],
-    [
-        [
-            "int adc_read_async",
-            "const struct device *dev,\n\t\t\t     const struct adc_sequence *sequence,\n\t\t\t     struct k_poll_signal *async"
-        ],
-        "adc.h",
-        true
-    ],
-    [
-        [
-            "int dac_channel_setup",
-            "const struct device *dev,\n\t\t\t\tconst struct dac_channel_cfg *channel_cfg"
-        ],
-        "dac.h",
-        true
-    ],
-    [
-        [
-            "int dac_write_value",
-            "const struct device *dev, uint8_t channel,\n\t\t\t      uint32_t value"
-        ],
-        "dac.h",
-        true
-    ],
-    [
-        [
             "int gpio_pin_interrupt_configure",
             "const struct device *port,\n\t\t\t\t\t   gpio_pin_t pin,\n\t\t\t\t\t   gpio_flags_t flags"
         ],
@@ -1409,6 +1369,30 @@
     ],
     [
         [
+            "int adc_channel_setup",
+            "const struct device *dev,\n\t\t\t\tconst struct adc_channel_cfg *channel_cfg"
+        ],
+        "adc.h",
+        false
+    ],
+    [
+        [
+            "int adc_read",
+            "const struct device *dev,\n\t\t       const struct adc_sequence *sequence"
+        ],
+        "adc.h",
+        false
+    ],
+    [
+        [
+            "int adc_read_async",
+            "const struct device *dev,\n\t\t\t     const struct adc_sequence *sequence,\n\t\t\t     struct k_poll_signal *async"
+        ],
+        "adc.h",
+        false
+    ],
+    [
+        [
             "int auxdisplay_display_on",
             "const struct device *dev"
         ],
@@ -2061,6 +2045,22 @@
             "const struct device *dev,\n\t\t\t\t\t    uint32_t flags"
         ],
         "counter.h",
+        false
+    ],
+    [
+        [
+            "int dac_channel_setup",
+            "const struct device *dev,\n\t\t\t\tconst struct dac_channel_cfg *channel_cfg"
+        ],
+        "dac.h",
+        false
+    ],
+    [
+        [
+            "int dac_write_value",
+            "const struct device *dev, uint8_t channel,\n\t\t\t      uint32_t value"
+        ],
+        "dac.h",
         false
     ],
     [

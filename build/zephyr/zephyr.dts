@@ -12,13 +12,13 @@
 		zephyr,flash-controller = &flash;  /* in zephyr\dts\arm\st\f4\stm32f4.dtsi:26 */
 		zephyr,cortex-m-idle-timer = &rtc; /* in zephyr\dts\arm\st\f4\stm32f4.dtsi:27 */
 		zephyr,entropy = &rng;             /* in zephyr\dts\arm\st\f4\stm32f405.dtsi:12 */
-		zephyr,console = &usart1;          /* in zephyr\boards\st\stm32f429i_disc1\stm32f429i_disc1.dts:19 */
 		zephyr,shell-uart = &usart1;       /* in zephyr\boards\st\stm32f429i_disc1\stm32f429i_disc1.dts:20 */
 		zephyr,sram = &sram0;              /* in zephyr\boards\st\stm32f429i_disc1\stm32f429i_disc1.dts:21 */
 		zephyr,flash = &flash0;            /* in zephyr\boards\st\stm32f429i_disc1\stm32f429i_disc1.dts:22 */
 		zephyr,ccm = &ccm0;                /* in zephyr\boards\st\stm32f429i_disc1\stm32f429i_disc1.dts:23 */
 		zephyr,display = &ltdc;            /* in zephyr\boards\st\stm32f429i_disc1\stm32f429i_disc1.dts:24 */
 		zephyr,touch = &stmpe811;          /* in zephyr\boards\st\stm32f429i_disc1\stm32f429i_disc1.dts:25 */
+		zephyr,console = &cdc_acm_uart0;   /* in trabalho_final_embarcados\app.overlay:9 */
 	};
 
 	/* node '/aliases' defined in zephyr\dts\common\skeleton.dtsi:13 */
@@ -1508,6 +1508,11 @@
 			pinctrl-0 = < &usb_otg_hs_dm_pb14 &usb_otg_hs_dp_pb15 &usb_otg_hs_id_pb12 >; /* in zephyr\boards\st\stm32f429i_disc1\stm32f429i_disc1.dts:269 */
 			pinctrl-names = "default";                                                   /* in zephyr\boards\st\stm32f429i_disc1\stm32f429i_disc1.dts:270 */
 			status = "okay";                                                             /* in zephyr\boards\st\stm32f429i_disc1\stm32f429i_disc1.dts:271 */
+
+			/* node '/soc/usb@40040000/cdc_acm_uart0' defined in trabalho_final_embarcados\app.overlay:14 */
+			cdc_acm_uart0: cdc_acm_uart0 {
+				compatible = "zephyr,cdc-acm-uart"; /* in trabalho_final_embarcados\app.overlay:15 */
+			};
 		};
 
 		/* node '/soc/can@40006400' defined in zephyr\dts\arm\st\f4\stm32f405.dtsi:208 */

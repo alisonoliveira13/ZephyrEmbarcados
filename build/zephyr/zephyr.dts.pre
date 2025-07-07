@@ -4297,4 +4297,23 @@ zephyr_udc0: &usbotg_hs {
  status = "okay";
 };
 # 0 "<command-line>" 2
+# 1 "C:/Users/aliso/zephyrproject/trabalho_final_embarcados/app.overlay" 1
+
+
+
+
+
+
+/ {
+ chosen {
+  zephyr,console = &cdc_acm_uart0;
+ };
+};
+
+&zephyr_udc0 {
+ cdc_acm_uart0: cdc_acm_uart0 {
+  compatible = "zephyr,cdc-acm-uart";
+ };
+};
+# 0 "<command-line>" 2
 # 1 "C:/Users/aliso/zephyrproject/zephyr/misc/empty_file.c"

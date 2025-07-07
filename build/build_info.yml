@@ -13,6 +13,7 @@ cmake:
      - 'C:/Users/aliso/zephyrproject/zephyr/dts/bindings'
     files:
      - 'C:/Users/aliso/zephyrproject/zephyr/boards/st/stm32f429i_disc1/stm32f429i_disc1.dts'
+     - 'C:/Users/aliso/zephyrproject/trabalho_final_embarcados/app.overlay'
     include-dirs:
      - 'C:/Users/aliso/zephyrproject/modules/hal/ambiq/dts'
      - 'C:/Users/aliso/zephyrproject/modules/hal/atmel/include'
@@ -39,6 +40,8 @@ cmake:
      - 'C:/Users/aliso/zephyrproject/zephyr/dts/arm'
      - 'C:/Users/aliso/zephyrproject/zephyr/dts/arc'
      - 'C:/Users/aliso/zephyrproject/zephyr/dts'
+    user-files:
+     - 'C:/Users/aliso/zephyrproject/trabalho_final_embarcados/app.overlay'
   kconfig:
     files:
      - 'C:/Users/aliso/zephyrproject/zephyr/boards/st/stm32f429i_disc1/stm32f429i_disc1_defconfig'

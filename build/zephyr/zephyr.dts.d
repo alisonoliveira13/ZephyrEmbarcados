@@ -42,4 +42,5 @@ empty_file.o: C:/Users/aliso/zephyrproject/zephyr/misc/empty_file.c \
  C:/Users/aliso/zephyrproject/zephyr/include/zephyr/dt-bindings/pinctrl/stm32-pinctrl.h \
  C:/Users/aliso/zephyrproject/zephyr/include/zephyr/dt-bindings/pinctrl/stm32-pinctrl-common.h \
  C:/Users/aliso/zephyrproject/zephyr/include/zephyr/dt-bindings/display/ili9xxx.h \
- C:/Users/aliso/zephyrproject/zephyr/include/zephyr/dt-bindings/input/input-event-codes.h
+ C:/Users/aliso/zephyrproject/zephyr/include/zephyr/dt-bindings/input/input-event-codes.h \
+ C:/Users/aliso/zephyrproject/trabalho_final_embarcados/app.overlay

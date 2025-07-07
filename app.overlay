@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2021 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 / {
 	chosen {
 		zephyr,console = &cdc_acm_uart0;
@@ -8,18 +14,4 @@
 	cdc_acm_uart0: cdc_acm_uart0 {
 		compatible = "zephyr,cdc-acm-uart";
 	};
-};
-
-/* Ativa o hardware da porta USB_USER (OTG_FS) */
-&usbotg_fs {
-	status = "okay";
-};
-
-/* Ativa o ADC e o DAC */
-&adc1 {
-	status = "okay";
-};
-
-&dac1 {
-	status = "okay";
 };
