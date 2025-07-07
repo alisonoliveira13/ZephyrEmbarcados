@@ -4298,21 +4298,23 @@ zephyr_udc0: &usbotg_hs {
 };
 # 0 "<command-line>" 2
 # 1 "C:/Users/aliso/zephyrproject/trabalho_final_embarcados/app.overlay" 1
-
-
-
-
-
-
 / {
  chosen {
-  zephyr,console = &cdc_acm_uart0;
+  zephyr,console = &cdc_acm_uart;
+  zephyr,shell-uart = &cdc_acm_uart;
  };
 };
 
+&usbotg_hs {
+ pinctrl-0 = <&usb_otg_hs_dm_pb14 &usb_otg_hs_dp_pb15>;
+ pinctrl-names = "default";
+ status = "okay";
+};
+
 &zephyr_udc0 {
- cdc_acm_uart0: cdc_acm_uart0 {
+ cdc_acm_uart: cdc_acm_uart {
   compatible = "zephyr,cdc-acm-uart";
+  label = "CDC_ACM_0";
  };
 };
 # 0 "<command-line>" 2

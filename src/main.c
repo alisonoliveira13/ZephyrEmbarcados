@@ -53,15 +53,7 @@ int main(void)
     gpio_init_callback(&button_cb_data, button_pressed_callback, BIT(button.pin));
     gpio_add_callback(button.port, &button_cb_data);
 
-    // 2. ATIVA O HARDWARE USB (A LINHA QUE FALTAVA!)
-    // Esta chamada faz com que a placa se anuncie como um dispositivo USB para o PC
-    if (usb_enable(NULL) != 0) {
-        printk("Falha ao habilitar o USB.\n");
-        return 0;
-    }
-
-    // A partir daqui, as tarefas (threads) definidas abaixo começarão a rodar.
-    // O printk abaixo só aparecerá depois que o USB estiver ativo e você se conectar.
+    
     printk("Sistema iniciado! LED piscando e botao pronto.\n");
     return 0;
 }
