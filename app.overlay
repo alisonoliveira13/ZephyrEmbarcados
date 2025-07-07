@@ -1,0 +1,17 @@
+
+/ {
+    aliases {
+        adc-0 = &adc1;
+        dac-0 = &dac1;
+    };
+};
+
+// Tentar habilitar ADC1 se existir
+&adc1 {
+    status = "okay";
+};
+
+// Tentar habilitar DAC1 se existir  
+&dac1 {
+    status = "okay";
+};
