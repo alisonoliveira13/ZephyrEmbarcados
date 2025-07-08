@@ -76,6 +76,7 @@
 		"C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/usb_c/cmake_install.cmake",
 		"C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/clock_control/cmake_install.cmake",
 		"C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/console/cmake_install.cmake",
+		"C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/entropy/cmake_install.cmake",
 		"C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/gpio/cmake_install.cmake",
 		"C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/hwinfo/cmake_install.cmake",
 		"C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/pinctrl/cmake_install.cmake",

@@ -130,6 +130,7 @@ C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/pmci/
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/pmci/CMakeFiles/rebuild_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/portability/CMakeFiles/edit_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/portability/CMakeFiles/rebuild_cache.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/random/CMakeFiles/subsys__random.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/random/CMakeFiles/edit_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/random/CMakeFiles/rebuild_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/subsys/rtio/CMakeFiles/edit_cache.dir
@@ -194,6 +195,9 @@ C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/cloc
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/console/CMakeFiles/drivers__console.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/console/CMakeFiles/edit_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/console/CMakeFiles/rebuild_cache.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/entropy/CMakeFiles/drivers__entropy.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/entropy/CMakeFiles/edit_cache.dir
+C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/entropy/CMakeFiles/rebuild_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/gpio/CMakeFiles/drivers__gpio.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/gpio/CMakeFiles/edit_cache.dir
 C:/Users/aliso/zephyrproject/trabalho_final_embarcados/build/zephyr/drivers/gpio/CMakeFiles/rebuild_cache.dir
