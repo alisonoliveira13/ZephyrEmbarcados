@@ -1,4 +1,4 @@
-// src/sensor_task.c - Uma tarefa de tempo real soft
+// src/sensor_task.c - Uma tarefa de tempo real soft (com correções de warnings)
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/logging/log.h>
@@ -71,10 +71,10 @@ void sensor_reading_task(void)
                     current->sequence, processing_time_us, SENSOR_DEADLINE_MS * 1000);
         }
         
-        // Log periódico dos dados
+        // Log periódico dos dados - CORREÇÃO: cast explícito para double
         if ((total_readings % 10) == 0) {
             LOG_INF("Leitura #%u: T=%.1f°C, H=%.1f%%, tempo=%u us",
-                    current->sequence, current->temperature, current->humidity, processing_time_us);
+                    current->sequence, (double)current->temperature, (double)current->humidity, processing_time_us);
         }
         
         // Avança índice circular
