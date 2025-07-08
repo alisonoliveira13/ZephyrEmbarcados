@@ -3,7 +3,7 @@
 #include <zephyr/shell/shell.h>
 #include <zephyr/logging/log.h>
 #include <stdlib.h>
-
+#include <math.h>>
 LOG_MODULE_REGISTER(shell_hard_filter, LOG_LEVEL_INF);
 
 /* --- REFERÊNCIAS EXTERNAS --- */

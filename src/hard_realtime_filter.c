@@ -4,6 +4,7 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/ring_buffer.h>
 #include <math.h>
+#include <string.h>
 
 LOG_MODULE_REGISTER(hard_filter, LOG_LEVEL_INF);
 
@@ -30,8 +31,13 @@ struct filter_state {
 #define ADC_NODE DT_ALIAS(adc)
 #define DAC_NODE DT_ALIAS(dac)
 
+#if DT_NODE_EXISTS(ADC_NODE)
 static const struct device *adc_dev = DEVICE_DT_GET(ADC_NODE);
+#endif
+
+#if DT_NODE_EXISTS(DAC_NODE)
 static const struct device *dac_dev = DEVICE_DT_GET(DAC_NODE);
+#endif
 
 /* --- CONFIGURAÇÃO ADC --- */
 static const struct adc_channel_cfg adc_cfg = {
@@ -39,15 +45,15 @@ static const struct adc_channel_cfg adc_cfg = {
     .reference = ADC_REF_INTERNAL,
     .acquisition_time = ADC_ACQ_TIME_DEFAULT,
     .channel_id = 0,
-    .input_positive = 0,
+    .differential = 0,
 };
 
 /* --- VARIÁVEIS GLOBAIS --- */
 static struct filter_coeffs coeffs;
 static struct filter_state filter_state;
-static K_TIMER_DEFINE(sample_timer, NULL, NULL);
+static struct k_timer sample_timer;
 static K_SEM_DEFINE(sample_sem, 0, 1);
-static K_MSGQ_DEFINE(sample_msgq, sizeof(uint16_t), 32, 4);
+K_MSGQ_DEFINE(sample_msgq, sizeof(uint16_t), 32, 4);
 
 /* --- ESTATÍSTICAS TEMPO REAL --- */
 static uint32_t total_samples = 0;
@@ -63,18 +69,18 @@ static void init_butterworth_filter(void)
     // Estes são coeficientes aproximados para demonstração
     
     // Coeficientes do numerador (b)
-    coeffs.b[0] = 0.0067;
-    coeffs.b[1] = 0.0268;
-    coeffs.b[2] = 0.0402;
-    coeffs.b[3] = 0.0268;
-    coeffs.b[4] = 0.0067;
+    coeffs.b[0] = 0.0067f;
+    coeffs.b[1] = 0.0268f;
+    coeffs.b[2] = 0.0402f;
+    coeffs.b[3] = 0.0268f;
+    coeffs.b[4] = 0.0067f;
     
     // Coeficientes do denominador (a)
-    coeffs.a[0] = 1.0000;
-    coeffs.a[1] = -2.3695;
-    coeffs.a[2] = 2.3140;
-    coeffs.a[3] = -1.0547;
-    coeffs.a[4] = 0.1874;
+    coeffs.a[0] = 1.0000f;
+    coeffs.a[1] = -2.3695f;
+    coeffs.a[2] = 2.3140f;
+    coeffs.a[3] = -1.0547f;
+    coeffs.a[4] = 0.1874f;
     
     // Inicializa estado do filtro
     memset(&filter_state, 0, sizeof(filter_state));
@@ -118,13 +124,19 @@ static float apply_filter(float input)
 /* --- CALLBACK DO TIMER (INTERRUPT CONTEXT) --- */
 static void sample_timer_handler(struct k_timer *timer)
 {
+    ARG_UNUSED(timer);
     // Sinaliza thread de processamento (não bloqueia)
     k_sem_give(&sample_sem);
 }
 
 /* --- TAREFA DE AMOSTRAGEM ADC (ALTA PRIORIDADE) --- */
-static void adc_sampling_task(void)
+static void adc_sampling_task(void *p1, void *p2, void *p3)
 {
+    ARG_UNUSED(p1);
+    ARG_UNUSED(p2);
+    ARG_UNUSED(p3);
+    
+#if DT_NODE_EXISTS(ADC_NODE)
     uint16_t sample_buffer[1];
     struct adc_sequence sequence = {
         .channels = BIT(0),
@@ -148,11 +160,24 @@ static void adc_sampling_task(void)
             k_msgq_put(&sample_msgq, &sample_buffer[0], K_NO_WAIT);
         }
     }
+#else
+    LOG_ERR("ADC não disponível - simulando dados");
+    while (1) {
+        k_sem_take(&sample_sem, K_FOREVER);
+        // Simula dados para teste
+        uint16_t dummy_sample = 2048 + (total_samples % 100);
+        k_msgq_put(&sample_msgq, &dummy_sample, K_NO_WAIT);
+    }
+#endif
 }
 
 /* --- TAREFA DE PROCESSAMENTO HARD REAL-TIME --- */
-static void hard_realtime_filter_task(void)
+static void hard_realtime_filter_task(void *p1, void *p2, void *p3)
 {
+    ARG_UNUSED(p1);
+    ARG_UNUSED(p2);
+    ARG_UNUSED(p3);
+    
     uint16_t raw_sample;
     uint32_t start_time, end_time, processing_time_us;
     
@@ -175,14 +200,10 @@ static void hard_realtime_filter_task(void)
         uint16_t dac_value = (uint16_t)((filtered + 1.0f) * 2048.0f);
         if (dac_value > 4095) dac_value = 4095;
         
-        // Envia para DAC
-        struct dac_channel_cfg dac_cfg = {
-            .channel_id = 0,
-            .resolution = 12,
-            .buffered = false,
-        };
-        
+        // Envia para DAC se disponível
+#if DT_NODE_EXISTS(DAC_NODE)
         dac_write_value(dac_dev, 0, dac_value);
+#endif
         
         end_time = k_cycle_get_32();
         processing_time_us = k_cyc_to_us_floor32(end_time - start_time);
@@ -235,14 +256,10 @@ int init_hard_realtime_filter(void)
 {
     int ret;
     
-    // Verifica dispositivos
+    // Verifica dispositivos se existirem
+#if DT_NODE_EXISTS(ADC_NODE)
     if (!device_is_ready(adc_dev)) {
         LOG_ERR("ADC não está pronto");
-        return -ENODEV;
-    }
-    
-    if (!device_is_ready(dac_dev)) {
-        LOG_ERR("DAC não está pronto");
         return -ENODEV;
     }
     
@@ -251,6 +268,15 @@ int init_hard_realtime_filter(void)
     if (ret < 0) {
         LOG_ERR("Erro ao configurar ADC: %d", ret);
         return ret;
+    }
+#else
+    LOG_WRN("ADC não disponível - modo simulação");
+#endif
+
+#if DT_NODE_EXISTS(DAC_NODE)
+    if (!device_is_ready(dac_dev)) {
+        LOG_ERR("DAC não está pronto");
+        return -ENODEV;
     }
     
     // Configura DAC
@@ -265,9 +291,15 @@ int init_hard_realtime_filter(void)
         LOG_ERR("Erro ao configurar DAC: %d", ret);
         return ret;
     }
+#else
+    LOG_WRN("DAC não disponível - modo simulação");
+#endif
     
     // Inicializa filtro
     init_butterworth_filter();
+    
+    // Inicializa timer
+    k_timer_init(&sample_timer, sample_timer_handler, NULL);
     
     // Inicia timer periódico
     k_timer_start(&sample_timer, K_USEC(SAMPLE_PERIOD_US), K_USEC(SAMPLE_PERIOD_US));
