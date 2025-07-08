@@ -3,7 +3,7 @@
 #include <zephyr/shell/shell.h>
 #include <zephyr/logging/log.h>
 #include <stdlib.h>
-#include <math.h>>
+#include <math.h>
 LOG_MODULE_REGISTER(shell_hard_filter, LOG_LEVEL_INF);
 
 /* --- REFERÊNCIAS EXTERNAS --- */
@@ -74,7 +74,6 @@ static int cmd_filter_info(const struct shell *sh, size_t argc, char **argv)
     shell_print(sh, "");
     shell_print(sh, "Fluxo de dados:");
     shell_print(sh, "  ADC -> Filtro Digital -> DAC");
-    shell_print(sh, "  Timer -> Amostragem -> Processamento -> Saida");
     
     return 0;
 }
@@ -161,7 +160,7 @@ static int cmd_filter_stress(const struct shell *sh, size_t argc, char **argv)
         // Adiciona trabalho computacional
         volatile float dummy = 0.0f;
         for (int i = 0; i < 1000; i++) {
-            dummy += sin(i * 0.1f);
+            dummy += sinf(i * 0.1f);
         }
         stress_count++;
         

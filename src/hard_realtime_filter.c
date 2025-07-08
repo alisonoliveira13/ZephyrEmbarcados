@@ -39,14 +39,7 @@ static const struct device *adc_dev = DEVICE_DT_GET(ADC_NODE);
 static const struct device *dac_dev = DEVICE_DT_GET(DAC_NODE);
 #endif
 
-/* --- CONFIGURAÇÃO ADC --- */
-static const struct adc_channel_cfg adc_cfg = {
-    .gain = ADC_GAIN_1,
-    .reference = ADC_REF_INTERNAL,
-    .acquisition_time = ADC_ACQ_TIME_DEFAULT,
-    .channel_id = 0,
-    .differential = 0,
-};
+
 
 /* --- VARIÁVEIS GLOBAIS --- */
 static struct filter_coeffs coeffs;
@@ -161,7 +154,6 @@ static void adc_sampling_task(void *p1, void *p2, void *p3)
         }
     }
 #else
-    LOG_ERR("ADC não disponível - simulando dados");
     while (1) {
         k_sem_take(&sample_sem, K_FOREVER);
         // Simula dados para teste
@@ -228,10 +220,10 @@ static void hard_realtime_filter_task(void *p1, void *p2, void *p3)
         }
         
         // Log periódico (sem afetar tempo real)
-        if ((total_samples % 1000) == 0) {
-            LOG_INF("Amostras processadas: %u, Perdas: %u, Último tempo: %u us",
-                    total_samples, missed_deadlines, processing_time_us);
-        }
+        //if ((total_samples % 1000) == 0) {
+        //    LOG_INF("Amostras processadas: %u, Perdas: %u, Último tempo: %u us",
+        //            total_samples, missed_deadlines, processing_time_us);
+        //}
     }
 }
 
@@ -254,21 +246,19 @@ void get_filter_info(uint32_t *sample_rate, uint32_t *cutoff_freq, uint32_t *dea
 /* --- INICIALIZAÇÃO DO SISTEMA --- */
 int init_hard_realtime_filter(void)
 {
-    int ret;
-    
-    // Verifica dispositivos se existirem
 #if DT_NODE_EXISTS(ADC_NODE)
-    if (!device_is_ready(adc_dev)) {
-        LOG_ERR("ADC não está pronto");
-        return -ENODEV;
-    }
-    
-    // Configura ADC
-    ret = adc_channel_setup(adc_dev, &adc_cfg);
-    if (ret < 0) {
-        LOG_ERR("Erro ao configurar ADC: %d", ret);
-        return ret;
-    }
+    /* --- E cole aqui, dentro do bloco #if --- */
+    static const struct adc_channel_cfg adc_cfg = {
+        .gain = ADC_GAIN_1,
+        .reference = ADC_REF_INTERNAL,
+        .acquisition_time = ADC_ACQ_TIME_DEFAULT,
+        .channel_id = 0,
+        .differential = 0,
+    };
+
+    if (!device_is_ready(adc_dev)) { ... }
+
+    int ret = adc_channel_setup(adc_dev, &adc_cfg); // <-- Onde ela é usada
 #else
     LOG_WRN("ADC não disponível - modo simulação");
 #endif
@@ -304,8 +294,6 @@ int init_hard_realtime_filter(void)
     // Inicia timer periódico
     k_timer_start(&sample_timer, K_USEC(SAMPLE_PERIOD_US), K_USEC(SAMPLE_PERIOD_US));
     
-    LOG_INF("Sistema de filtro hard real-time iniciado com sucesso");
-    LOG_INF("Taxa de amostragem: %d Hz, Deadline: %d us", SAMPLE_RATE_HZ, HARD_DEADLINE_US);
     
     return 0;
 }

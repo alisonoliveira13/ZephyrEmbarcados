@@ -53,7 +53,8 @@ void sensor_reading_task(void)
         // Simula tempo de processamento variável (leitura I2C, ADC, etc.)
         // Tempo real soft: pode ocasionalmente perder deadline
         uint32_t processing_delay = sys_rand32_get() % 100000; // 0-100ms
-        k_busy_wait(processing_delay);
+        k_usleep(processing_delay); 
+
         
         // Calcula tempo de processamento
         processing_time = k_cycle_get_32() - start_time;
@@ -72,10 +73,10 @@ void sensor_reading_task(void)
         }
         
         // Log periódico dos dados - CORREÇÃO: cast explícito para double
-        if ((total_readings % 10) == 0) {
-            LOG_INF("Leitura #%u: T=%.1f°C, H=%.1f%%, tempo=%u us",
-                    current->sequence, (double)current->temperature, (double)current->humidity, processing_time_us);
-        }
+        //if ((total_readings % 10) == 0) {
+        //    LOG_INF("Leitura #%u: T=%.1f°C, H=%.1f%%, tempo=%u us",
+        //            current->sequence, (double)current->temperature, (double)current->humidity, processing_time_us);
+        //}
         
         // Avança índice circular
         reading_index = (reading_index + 1) % MAX_READINGS;

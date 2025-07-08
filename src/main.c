@@ -1,4 +1,3 @@
-// src/main.c - Versão integrada com Filtro Hard Real-Time
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/usb/usb_device.h>
@@ -54,22 +53,22 @@ void button_action_task(void)
         gpio_pin_set_dt(&led, 1);
         k_msleep(100);
         gpio_pin_set_dt(&led, 0);
+        k_msleep(50);
+        k_sem_reset(&button_sem);
+
+
     }
 }
 
 /* --- FUNÇÃO PRINCIPAL --- */
 int main(void)
 {
-    LOG_INF("=== SISTEMA TEMPO REAL HIBRIDO INICIANDO ===");
-    
     // 1. Inicializa filtro hard real-time
     int ret = init_hard_realtime_filter();
     if (ret < 0) {
         LOG_ERR("Falha ao inicializar filtro hard real-time: %d", ret);
         LOG_ERR("Sistema continuara sem filtro hard real-time");
-    } else {
-        LOG_INF("Filtro hard real-time inicializado com sucesso");
-    }
+    } 
     
     // 2. Inicializa hardware do botão
     if (!gpio_is_ready_dt(&button)) {
@@ -83,30 +82,12 @@ int main(void)
     gpio_add_callback(button.port, &button_cb_data);
     
     // 3. Sistema pronto!
-    LOG_INF("=== SISTEMA INICIADO COM SUCESSO ===");
-    LOG_INF("Funcionalidades disponiveis:");
-    LOG_INF("  - LED de status piscando");
-    LOG_INF("  - Botao interativo");
-    LOG_INF("  - Tarefa soft real-time: leitura de sensores (5Hz)");
-    LOG_INF("  - Tarefa hard real-time: filtro digital (8kHz)");
-    LOG_INF("");
+    
+   
     LOG_INF("Comandos shell disponiveis:");
     LOG_INF("  - 'sensor' - Comandos da tarefa soft real-time");
     LOG_INF("  - 'filter' - Comandos da tarefa hard real-time");
     LOG_INF("  - 'sysinfo' - Informacoes do sistema");
-    LOG_INF("");
-    LOG_INF("Exemplos de uso:");
-    LOG_INF("  sensor info        - Info da tarefa soft real-time");
-    LOG_INF("  sensor stats       - Estatisticas do sensor");
-    LOG_INF("  filter info        - Info do filtro hard real-time");
-    LOG_INF("  filter stats       - Estatisticas do filtro");
-    LOG_INF("  filter monitor 10  - Monitora filtro por 10 segundos");
-    LOG_INF("  sysinfo general    - Info geral do sistema");
-    LOG_INF("");
-    LOG_INF("=== SISTEMA TEMPO REAL HIBRIDO OPERACIONAL ===");
-    LOG_INF("Hard Real-Time: Filtro digital (deadline rigido)");
-    LOG_INF("Soft Real-Time: Sensores (deadline flexivel)");
-    LOG_INF("Background: LED, botao, shell");
     
     return 0;
 }
